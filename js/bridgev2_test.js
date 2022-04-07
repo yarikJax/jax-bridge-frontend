@@ -19,6 +19,13 @@ void async function main() {
     $("#network2").on('change', check_visible);
     $("#network1").on('change', network1_changed);
     init_swap_inn_block();
+    $("#swap_network").click(() => {
+        let network1 = get_network1();
+        let network2 = get_network2();
+        $("#network1").val(network2);
+        $("#network2").val(network1);
+        $("#network1").trigger('change');
+    })
 }()
 
 function init_swap_inn_block() {
@@ -52,6 +59,10 @@ function network1_changed() {
     let network2 = $("#network2").val();
     if(get_token() == "jax" && network2 == "jax"){
         network2 = "jax1";
+        $("#network2").val(network2);
+    }
+    if(get_token() == "jax" && network1.indexOf("jax") == 0 && network2.indexOf("jax") == 0) {
+        network2 = "bsc";
         $("#network2").val(network2);
     }
     if(get_token() == "jxn" && network2.length == 4 && network2.indexOf("jax") == 0) {
